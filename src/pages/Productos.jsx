@@ -11,7 +11,7 @@ function Productos() {
   const [search, setSearch] = useState("");
   const [tiendaId, setTiendaId] = useState(null);
 
-  // 🔹 1. Obtener la tienda_id del usuario autenticado
+  // 1. Obtener la tienda_id del usuario autenticado
   const fetchTiendaId = async () => {
     try {
       const { data: userData, error: userError } = await supabase.auth.getUser();
@@ -34,7 +34,7 @@ function Productos() {
     }
   };
 
-  // 🔹 2. Obtener productos con nombres de proveedor y categoría
+  // 2. Obtener productos con nombres de proveedor y categoría
   const fetchProductos = async (tienda_id) => {
     try {
       const { data, error } = await supabase
@@ -103,7 +103,7 @@ function Productos() {
     fetchProductos(tiendaId);
   };
 
-  // ✅ Fragmento funcional: mostrar cantidad total de productos
+  // Fragmento funcional: mostrar cantidad total de productos
   const totalProductos = filteredProductos.length;
 
   return (
@@ -172,7 +172,7 @@ function Productos() {
                 )}
               </td>
               <td>{p.porcentaje_ganancia}</td>
-              {/* ✅ Fragmento corregido: mostrar tipo de producto */}
+              {/* Fragmento corregido: mostrar tipo de producto */}
               <td>{p.tipo_producto || "General"}</td>
               <td>
                 <button onClick={() => handleEdit(p)}>Editar</button>
