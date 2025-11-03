@@ -108,6 +108,9 @@ function Productos() {
     fetchProductos(tiendaId);
   };
 
+  //Fragmento funcional: mostrar cantidad total de productos (correcto)
+  const totalProductos = filteredProductos.length;
+
   return (
     <div style={{ padding: "20px" }}>
       <h2>Productos</h2>
@@ -121,6 +124,14 @@ function Productos() {
           style={{ flex: 1, padding: "5px" }}
         />
       </div>
+    
+
+
+      {/* Mostrar total de productos (error) */}
+      <p style={{ fontWeight: "bold", marginTop: "10px" }}>
+        Total de productos registrados: {totalProductos}
+      </p>
+
 
       <table border="1" cellPadding="8" style={{ width: "100%", marginTop: "10px" }}>
         <thead>
@@ -174,6 +185,12 @@ function Productos() {
                 )}
               </td>
               <td>{p.porcentaje_ganancia}</td>
+
+              {/* Fragmento con error (campo inexistente) */}
+                <td>{p.precio_mayoreo}</td>
+
+
+
               <td>
                 <button onClick={() => handleEdit(p)}>Editar</button>
                 <button
