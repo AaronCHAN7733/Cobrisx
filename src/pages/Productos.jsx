@@ -48,7 +48,6 @@ function Productos() {
 
       if (error) throw error;
 
-      // 🔸 Mapear los nombres
       const productosConNombres = data.map((p) => ({
         ...p,
         proveedor_nombre: p.proveedores?.nombre || "Sin proveedor",
@@ -62,17 +61,14 @@ function Productos() {
     }
   };
 
-  // 🔹 3. Cargar productos cuando haya tiendaId
   useEffect(() => {
     if (tiendaId) fetchProductos(tiendaId);
   }, [tiendaId]);
 
-  // 🔹 4. Obtener tienda al iniciar
   useEffect(() => {
     fetchTiendaId();
   }, []);
 
-  // 🔹 5. Filtrar productos
   useEffect(() => {
     const lowerSearch = search.toLowerCase();
     setFilteredProductos(
@@ -85,7 +81,6 @@ function Productos() {
     );
   }, [search, productos]);
 
-  // 🔹 6. Acciones
   const handleEdit = (producto) => {
     setSelectedProducto(producto);
     setShowModal(true);
@@ -108,9 +103,12 @@ function Productos() {
     fetchProductos(tiendaId);
   };
 
+  // ✅ Fragmento funcional: mostrar cantidad total de productos
+  const totalProductos = filteredProductos.length;
+
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Productos</h2>
+      <h2>Productos ({totalProductos})</h2>
       <div style={{ marginBottom: "10px", display: "flex", gap: "10px" }}>
         <button onClick={() => setShowModal(true)}>Agregar Producto</button>
         <input
@@ -174,6 +172,8 @@ function Productos() {
                 )}
               </td>
               <td>{p.porcentaje_ganancia}</td>
+              {/* ✅ Fragmento corregido: mostrar tipo de producto */}
+              <td>{p.tipo_producto || "General"}</td>
               <td>
                 <button onClick={() => handleEdit(p)}>Editar</button>
                 <button
